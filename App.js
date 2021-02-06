@@ -37,7 +37,7 @@ const App = () => {
               <Stack.Screen
                 name="NuevaOrden"
                 component={NuevaOrden}
-                options={{title: 'Nuevo Pedido'}}
+                options={{title: 'Pedido en Salon'}}
               />
               <Stack.Screen
                 name="Menu"

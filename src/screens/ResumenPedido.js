@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Fragment,
+  ImageBackground,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
@@ -37,54 +38,61 @@ const ResumenPedido = () => {
 
   return (
     <View style={globalStyles.contenedor}>
-      <View style={globalStyles.contenido}>
-        <Text style={globalStyles.titulo}>Resumen Pediddo</Text>
-        {pedido &&
-          pedido.map((platillo, i) => {
-            const {cantidad, nombre, imagen, id, precio} = platillo;
-            return (
-              <View key={id + i}>
-                {/* list */}
-                <View>
+      <ImageBackground
+        source={{
+          uri:
+            'https://image.freepik.com/foto-gratis/desenfoque-color-cafe-claro-restaurante-fondo-mesa-madera-marron-vintage_42708-394.jpg',
+        }}
+        style={styles.imgFondo}>
+        <View style={globalStyles.contenido}>
+          <Text style={globalStyles.titulo}>Resumen Pediddo</Text>
+          {pedido &&
+            pedido.map((platillo, i) => {
+              const {cantidad, nombre, imagen, id, precio} = platillo;
+              return (
+                <View key={id + i}>
+                  {/* list */}
                   <View>
-                    <Image
-                      style={styles.img}
-                      source={{
-                        uri: imagen,
-                      }}
-                    />
-                  </View>
+                    <View>
+                      <Image
+                        style={styles.img}
+                        source={{
+                          uri: imagen,
+                        }}
+                      />
+                    </View>
 
-                  <View>
-                    <Text>{nombre} </Text>
-                    <Text>Cantidad: {cantidad} </Text>
-                    <Text>Precio: $ {precio} </Text>
+                    <View>
+                      <Text>{nombre} </Text>
+                      <Text>Cantidad: {cantidad} </Text>
+                      <Text>Precio: $ {precio} </Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            );
-          })}
+              );
+            })}
 
-        <Text style={globalStyles.cantidad}>Total a Pagar: $ {total}</Text>
+          <Text style={globalStyles.cantidad}>Total a Pagar: $ {total}</Text>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Menu')}
-          style={styles.btnSeguirPidiendo}>
-          <Text style={[globalStyles.botonTexto, {color: '#FFF'}]}>
-            Seguir Pidiendo
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      <View>
-        <View>
           <TouchableOpacity
-            onPress={() => progresoPedido()}
-            style={[styles.botonOrdenarPedido]}>
-            <Text style={globalStyles.botonTexto}>Ordenar Pedido</Text>
+            onPress={() => navigation.navigate('Menu')}
+            style={styles.btnSeguirPidiendo}>
+            <Text style={[globalStyles.botonTexto, {color: '#FFF'}]}>
+              Seguir Pidiendo
+            </Text>
           </TouchableOpacity>
         </View>
-      </View>
+
+        <View>
+          <View>
+            <TouchableOpacity
+              onPress={() => progresoPedido()}
+              style={[styles.botonOrdenarPedido]}>
+              <Text style={globalStyles.botonTexto}>Ordenar Pedido</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -102,6 +110,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: '#000',
     height: 35,
+  },
+  imgFondo: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 export default ResumenPedido;

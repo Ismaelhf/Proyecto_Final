@@ -1,5 +1,12 @@
 import React, {useContext, useEffect, Fragment} from 'react';
-import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 import globalStyles from '../styles/global';
 import {useNavigation} from '@react-navigation/native';
 
@@ -45,49 +52,56 @@ const Menu = () => {
   return (
     <>
       <View style={styles.container}>
-        <View style={globalStyles.contenedor}>
-          {/* <Text>Menu</Text> */}
-          {menu &&
-            menu.map((platillo, i) => {
-              const {
-                imagen,
-                nombre,
-                descripcion,
-                categoria,
-                precio,
-                id,
-              } = platillo;
+        <ImageBackground
+          source={{
+            uri:
+              'https://image.freepik.com/foto-gratis/desenfoque-color-cafe-claro-restaurante-fondo-mesa-madera-marron-vintage_42708-394.jpg',
+          }}
+          style={styles.imgFondo}>
+          <View style={globalStyles.contenedor}>
+            {/* <Text>Menu</Text> */}
+            {menu &&
+              menu.map((platillo, i) => {
+                const {
+                  imagen,
+                  nombre,
+                  descripcion,
+                  categoria,
+                  precio,
+                  id,
+                } = platillo;
 
-              return (
-                <Fragment key={id}>
-                  {mostrarHeading(categoria, i)}
-                  <TouchableOpacity
-                    style={styles.bodyMenu}
-                    onPress={() => {
-                      // Eliminar algunas propiedades del platillo, existencia de extrae y se copia platillo a platillo2
-                      const {existencia, ...platillo2} = platillo;
+                return (
+                  <Fragment key={id}>
+                    {mostrarHeading(categoria, i)}
+                    <TouchableOpacity
+                      style={styles.bodyMenu}
+                      onPress={() => {
+                        // Eliminar algunas propiedades del platillo, existencia de extrae y se copia platillo a platillo2
+                        const {existencia, ...platillo2} = platillo;
 
-                      seleccionarPlatillo(platillo2);
-                      navigation.navigate('DetallePlatillo');
-                    }}>
-                    <Image
-                      style={styles.img}
-                      source={{
-                        uri: imagen,
-                      }}
-                    />
-                    <View style={styles.text}>
-                      <Text style={styles.textMenu}>{nombre}</Text>
-                      <Text style={styles.textMenuDesp}>{descripcion}</Text>
-                      <Text style={styles.textMenuPrecio}>
-                        Precio: ${precio}
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                </Fragment>
-              );
-            })}
-        </View>
+                        seleccionarPlatillo(platillo2);
+                        navigation.navigate('DetallePlatillo');
+                      }}>
+                      <Image
+                        style={styles.img}
+                        source={{
+                          uri: imagen,
+                        }}
+                      />
+                      <View style={styles.text}>
+                        <Text style={styles.textMenu}>{nombre}</Text>
+                        <Text style={styles.textMenuDesp}>{descripcion}</Text>
+                        <Text style={styles.textMenuPrecio}>
+                          Precio: ${precio}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </Fragment>
+                );
+              })}
+          </View>
+        </ImageBackground>
       </View>
     </>
   );
@@ -130,6 +144,11 @@ const styles = StyleSheet.create({
     color: '#F1F3F4',
     fontWeight: 'bold',
     textTransform: 'uppercase',
+  },
+  imgFondo: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 export default Menu;

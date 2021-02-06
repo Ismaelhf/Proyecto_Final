@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   StyleSheet,
+  ImageBackground,
 } from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
